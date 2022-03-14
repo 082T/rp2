@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="obradi.php" method="get">
+        <label for="Name">Name:</label>
+        <input type="text" name="name" id="name">
+        <br>
+        <label for="password">Password:</label>
+        <input type="text" name="password" id="password">
+        <br>
+        <label for="gender">Gender:</label>
+        <input type="radio" value="male" name="gender" checked>Male</radio>
+        <input type="radio" value="female" name="gender">Female</radio>
+        <br>
+        <label for="meals">Meals:</label>
+        <br>
+        <input type="checkbox" value="breakfast" name="toeat">breakfast</checkbox>
+        <br>
+        <input type="checkbox" value="lunch" name="toeat">lunch</checkbox>
+        <br>
+        <input type="checkbox" value="dinner" name="toeat">dinner</checkbox>
+        <br>
+        <label for="continent">Continent:</label>
+        <select name="continent">
+            <option value="asia">Asia</option>
+            <option value="europe">Europe</option>
+            <option value="africa">Africa</option>
+        </select>
+        <br>
+        <label for="Remark">Remark:</label>
+        <br>
+        <textarea nema="textarea" rows="10" cols="50"></textarea>
+        <br>
+        <button type="submit">Send</button>
+        <button type="reset">Erase</button>
+    </form>
+
+</body>
+</html>
