@@ -1,0 +1,180 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    
+
+
+    <script src="https://rp2.studenti.math.hr/~zbujanov/dz3/puzzle.js"></script>
+
+    <select id="selectNumber"></select>
+
+    <input id="clickme" type="button" value="Zapocni igru!" onclick="startgame();" />
+    
+    <div id="table_container"></div>
+
+    <label for="colornameslabel" id="colornameslabel"></label>
+
+    <div id="radioid">
+        <!-- <input type="radio" value="blue" name="colorname" id="colorname" checked>Blue</radio>
+        <input type="radio" value="yellow" name="colorname" id="colorname">Yellow</radio>
+        <input type="radio" value="green" name="colorname" id="colorname">Green</radio>
+        <input type="radio" value="red" name="colorname" id="colorname">Red</radio> -->
+    </div>
+
+    <script>
+        var select = document.getElementById("selectNumber");
+        let names = [];
+        for(var i=0; i<puzzle.length;i++)
+        {
+            names.push(puzzle[i].name);
+        }
+        for(var i = 0; i < names.length; i++) 
+        {
+            var opt = names[i];
+            var el = document.createElement("option");
+            el.textContent = opt;
+            el.value = opt;
+            select.appendChild(el);
+        }
+        
+    </script>
+    
+        
+    <script>
+    
+        function startgame()
+        {
+            var table_container = document.querySelector("#table_container");
+            table_container.innerHTML = "";
+
+            var sv = document.getElementById("selectNumber");
+            var selected = sv.options[sv.selectedIndex].value;
+            //selected = easy/medium/hard
+            var i;
+            var trenutni_puzzle;
+            for (i = 0; i < puzzle.length; i++)
+            {
+                if(puzzle[i].name == selected) trenutni_puzzle = puzzle[i];
+            }
+
+            console.log(trenutni_puzzle);
+            
+
+            const table = document.createElement('table');
+            const table_body = document.createElement('tbody');
+            for (let i = 0; i < trenutni_puzzle.size; i++) 
+            {
+                const tr = document.createElement('tr');
+                for (var j = 0; j < trenutni_puzzle.size; j++) 
+                {
+                    const td = document.createElement('td');
+                    td.height = 33;
+                    td.width = 33;
+                    td.style.border = "1px solid black";
+                    td.style.textAlign = "center";
+
+                    $(td).on( "contextmenu", function() { return false; } );
+
+                    let ima = 0;
+                    //ako dobre koordinate onda nacrtaj * i obojaj
+                    for(var k = 0; k < trenutni_puzzle.A_row.length; k++)
+                    {
+                        if(i == trenutni_puzzle.A_row[k]-1 && j == trenutni_puzzle.A_col[k]-1)
+                        {
+                            ima = 1;
+                            //obojaj u k-tu boju i stavi *
+                            td.textContent = "*";
+                            td.style.backgroundColor=trenutni_puzzle.color[k];
+                        }
+                        if(i == trenutni_puzzle.B_row[k]-1 && j == trenutni_puzzle.B_col[k]-1)
+                        {
+                            ima = 1;
+                            //obojaj u k-tu boju i stavi *
+                            td.textContent = "*";
+                            td.style.backgroundColor=trenutni_puzzle.color[k];
+                        }
+                    }
+
+                    //add on click even listener if ima = 0
+                    if(ima==0)
+                    {
+                        td.addEventListener('click', function onClick(event)
+                        {
+                            if(event.target.style.backgroundColor == "")
+                            {
+                                event.target.style.backgroundColor = document.querySelector('input[name="colorname"]:checked').value;
+                            }
+                        })
+                        td.addEventListener('contextmenu', function onClick(event)
+                        {
+                            event.target.style.backgroundColor = "";
+                        })
+                    }
+
+                    tr.append(td);
+                }
+                table_body.append(tr);
+            }
+            table.append(table_body);
+
+            document.querySelector("#table_container").appendChild(table);
+
+
+            document.getElementById('colornameslabel').innerHTML = 'Odaberi boju za igranje:';
+            
+
+            // <input type="radio" value="blue" name="colorname" id="colorname" checked>Blue</radio>
+
+            var radio_id_get = document.getElementById("radioid");
+            radio_id_get.innerHTML = "";
+
+            for(let i = 0; i < trenutni_puzzle.color.length; i++)
+            {
+                let stavi_radio = document.createElement('input');
+                stavi_radio.name = 'colorname';
+                stavi_radio.value = trenutni_puzzle.color[i];
+                stavi_radio.setAttribute('type', 'radio');
+
+                radio_id_get.appendChild(stavi_radio)
+
+                let stavi_label = document.createElement('label');
+                stavi_label.textContent = trenutni_puzzle.color[i];
+
+                radio_id_get.appendChild(stavi_label);
+
+            }
+
+        }
+    
+    </script>
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
