@@ -1,7 +1,7 @@
 <?php 
     
     $dbname = 'prezime';
-    $db = new PDO('mysql:host=rp2.studenti.math.hr;dbname=' . $dbname . ';charset=utf8', 'student', 'pass.-----');
+    $db = new PDO('mysql:host=rp2.studenti.math.hr;dbname=' . $dbname . ';charset=utf8', 'ime', 'pass');
 
 
     $st = $db->query('SELECT JMBAG,Ime,Prezime FROM Studenti');
